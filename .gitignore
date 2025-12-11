@@ -1,0 +1,39 @@
+# 作業系統產生的檔案
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 編輯器和 IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 日誌檔案
+*.log
+logs/
+
+# 暫存檔案
+*.tmp
+*.temp
+.cache/
+
+# 備份檔案
+*.backup
+*.bak
+
+# 測試產生的檔案
+test-results/
+coverage/
+
+# 本地設定檔案
+.env.local
+.env.*.local
+
+# 使用者特定的設定
+config.local.*
