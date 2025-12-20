@@ -13,7 +13,7 @@
   "description": "任務初始化器：詢問使用者建立新任務內容，自動建立任務目錄和初始化 handoff.md 文件。",
   "version": "1",
   "when": {
-    "type": "userTriggered"
+    "type": "promptSubmit"
   },
   "then": {
     "type": "askAgent",
