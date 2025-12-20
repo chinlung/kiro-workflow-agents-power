@@ -36,7 +36,7 @@
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "docs/*/handoff.md"
+      "**/docs/*/handoff.md"
     ]
   },
   "then": {
@@ -60,7 +60,7 @@
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "docs/*/handoff.md"
+      "**/docs/*/handoff.md"
     ]
   },
   "then": {
@@ -84,7 +84,7 @@
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "docs/*/handoff.md"
+      "**/docs/*/handoff.md"
     ]
   },
   "then": {
@@ -108,7 +108,7 @@
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "docs/*/handoff.md"
+      "**/docs/*/handoff.md"
     ]
   },
   "then": {
@@ -132,7 +132,7 @@
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "docs/*/handoff.md"
+      "**/docs/*/handoff.md"
     ]
   },
   "then": {
@@ -156,7 +156,7 @@
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "docs/*/handoff.md"
+      "**/docs/*/handoff.md"
     ]
   },
   "then": {
@@ -180,7 +180,7 @@
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "docs/*/handoff.md"
+      "**/docs/*/handoff.md"
     ]
   },
   "then": {
@@ -204,7 +204,7 @@
   "when": {
     "type": "fileEdited",
     "patterns": [
-      "docs/*/handoff.md"
+      "**/docs/*/handoff.md"
     ]
   },
   "then": {
