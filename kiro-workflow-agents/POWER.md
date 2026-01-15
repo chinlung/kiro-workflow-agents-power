@@ -46,6 +46,8 @@ Kiro Workflow Agents 是一個完整的軟體開發工作流程自動化系統�
 | 07 | Quality Assurance | 品質檢查和驗證 | 07-quality-report.md |
 | 08 | Documentation Specialist | 更新文件和產生 PR | 08-documentation-report.md, pr.md |
 
+**注意**：角色 03、04、06 已整合 PBT 支援（版本 1.1），這些 Hook 的 prompt 內容較長但已壓縮為單行字串以確保 JSON 格式正確。
+
 ### Property-Based Testing 整合
 
 此工作流程支援 Property-Based Testing (PBT)，可自動根據專案語言選擇合適的 PBT 框架：
