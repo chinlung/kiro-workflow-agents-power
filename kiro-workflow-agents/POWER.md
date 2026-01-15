@@ -23,6 +23,9 @@ Kiro Workflow Agents 是一個完整的軟體開發工作流程自動化系統�
 此 Power 包含以下詳細指南：
 
 - **hook-configurations** - 完整的 Hook 設定檔案內容和安裝指南
+- **property-based-testing** - Property-Based Testing 整合指南，支援多種程式語言
+- **pbt-hook-updates** - 如何更新現有 Hooks 以支援 PBT 的詳細步驟
+- **testing-best-practices** - 語言無關的測試最佳實踐指南，涵蓋單元測試、整合測試、PBT 等
 - **troubleshooting** - 常見問題解決方案和疑難排解指南
 
 使用 `readSteering` 動作來存取特定的指南內容。
@@ -36,12 +39,27 @@ Kiro Workflow Agents 是一個完整的軟體開發工作流程自動化系統�
 | 00 | Task Initializer | 任務初始化，建立任務目錄和 handoff.md | handoff.md |
 | 01 | Issue Analyst | 分析需求和問題背景 | 01-requirements-analysis.md |
 | 02 | Code Archaeologist | 分析現有程式碼庫 | 02-code-analysis.md |
-| 03 | Solution Architect | 設計解決方案和架構 | 03-architecture-design.md |
-| 04 | Build Engineer | 設定建置環境和工具 | 04-build-setup.md |
+| 03 | Solution Architect | 設計解決方案和架構，定義 Correctness Properties | 03-architecture-design.md |
+| 04 | Build Engineer | 設定建置環境和工具，配置 PBT 框架 | 04-build-setup.md |
 | 05 | Implementation Specialist | 實際撰寫程式碼 | 05-implementation-report.md |
-| 06 | Test Engineer | 撰寫和執行測試 | 06-test-report.md |
+| 06 | Test Engineer | 撰寫和執行測試（包含 Property-Based Tests），遵循測試最佳實踐 | 06-test-report.md |
 | 07 | Quality Assurance | 品質檢查和驗證 | 07-quality-report.md |
 | 08 | Documentation Specialist | 更新文件和產生 PR | 08-documentation-report.md, pr.md |
+
+### Property-Based Testing 整合
+
+此工作流程支援 Property-Based Testing (PBT)，可自動根據專案語言選擇合適的 PBT 框架：
+
+- **JavaScript/TypeScript**: fast-check
+- **Python**: Hypothesis
+- **PHP**: Eris
+- **Java**: jqwik
+- **其他語言**: 參考 `property-based-testing` steering 文件
+
+PBT 整合流程：
+1. **Solution Architect** 定義 Correctness Properties
+2. **Build Engineer** 檢測語言並配置 PBT 框架
+3. **Test Engineer** 實作和執行 Property-Based Tests
 
 ## 入門指南
 
@@ -125,7 +143,52 @@ Kiro Workflow Agents 是一個完整的軟體開發工作流程自動化系統�
 - ✅ Completed：已完成
 - ❌ Failed：執行失敗
 
-### 工作流程 3：手動介入和調整
+### 工作流程 3：使用 Property-Based Testing
+
+**目標**：為核心業務邏輯定義和驗證 Correctness Properties
+
+**適用場景**：
+- 涉及數學計算或演算法
+- 需要驗證不變性或對稱性
+- 資料轉換和序列化
+- 核心業務規則驗證
+
+**步驟**：
+1. **Solution Architect 階段**：
+   - 在 `03-architecture-design.md` 中定義 Correctness Properties
+   - 指定 property 類型（Invariant/Symmetry/Idempotence/Round-trip）
+   - 說明測試策略
+
+2. **Build Engineer 階段**：
+   - 自動檢測專案語言
+   - 推薦合適的 PBT 框架
+   - 在 `04-build-setup.md` 中記錄安裝指令
+
+3. **Test Engineer 階段**：
+   - 根據定義的 properties 撰寫 PBT 測試
+   - 執行測試並記錄結果
+   - 如果失敗，分析反例並修復
+
+**範例**：
+```
+任務：實作匯款金額驗證
+
+Solution Architect 定義：
+- Property 1.1: 金額必須大於 0（Invariant）
+- Property 1.2: 匯率轉換的對稱性（Symmetry）
+
+Build Engineer 檢測：
+- 語言：TypeScript
+- 框架：fast-check
+- 安裝：npm install --save-dev fast-check
+
+Test Engineer 實作：
+- 撰寫 PBT 測試驗證兩個 properties
+- 執行 500 個測試案例
+- 所有測試通過
+```
+
+### 工作流程 4：手動介入和調整
 
 **目標**：在自動化流程中進行必要的人工介入
 
