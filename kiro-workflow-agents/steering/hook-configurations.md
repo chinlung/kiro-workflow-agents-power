@@ -17,7 +17,7 @@
   },
   "then": {
     "type": "askAgent",
-    "prompt": "詢問使用者建立新任務內容。\n\n如果使用者想要建立新任務，請執行以下步驟：\n\n1. **提取任務資訊**：\n   - 從使用者訊息中提取任務名稱或描述\n   - 如果使用者沒有提供足夠資訊，詢問任務名稱和簡短描述\n\n2. **建立任務目錄**：\n   - 產生任務目錄名稱：`docs/task-YYYYMMDD-HHMM-brief-name/`\n   - 例如：`docs/task-20241210-1430-add-user-profile/`\n   - 建立該目錄\n\n3. **建立 handoff.md**：\n   在任務目錄下建立 `handoff.md` 文件，包含以下內容：\n\n```markdown\n# 任務交接文件\n\n## 任務資訊\n- **任務名稱**：[從使用者訊息提取]\n- **建立時間**：[當前時間]\n- **相關 Issue**：[如果使用者有提供]\n- **任務描述**：[從使用者訊息提取或詢問]\n\n## 工作流程狀態\n\n### 當前狀態\n- **Status**: 🆕 New Task\n- **Current Role**: Issue Analyst\n- **Progress**: 0/8 角色完成\n\n### 角色完成狀態\n\n| 角色 | 狀態 | 完成時間 | Deliverable |\n|------|------|----------|-------------|\n| 01. Issue Analyst | ⏳ Pending | - | 01-requirements-analysis.md |\n| 02. Code Archaeologist | ⏳ Pending | - | 02-code-analysis.md |\n| 03. Solution Architect | ⏳ Pending | - | 03-architecture-design.md |\n| 04. Build Engineer | ⏳ Pending | - | 04-build-setup.md |\n| 05. Implementation Specialist | ⏳ Pending | - | 05-implementation-report.md |\n| 06. Test Engineer | ⏳ Pending | - | 06-test-report.md |\n| 07. Quality Assurance Specialist | ⏳ Pending | - | 07-quality-report.md |\n| 08. Documentation Specialist | ⏳ Pending | - | 08-documentation-report.md |\n\n## 角色工作摘要\n\n### 01. Issue Analyst\n**狀態**: ⏳ 等待開始\n\n### 02. Code Archaeologist\n**狀態**: ⏳ 等待開始\n\n### 03. Solution Architect\n**狀態**: ⏳ 等待開始\n\n### 04. Build Engineer\n**狀態**: ⏳ 等待開始\n\n### 05. Implementation Specialist\n**狀態**: ⏳ 等待開始\n\n### 06. Test Engineer\n**狀態**: ⏳ 等待開始\n\n### 07. Quality Assurance Specialist\n**狀態**: ⏳ 等待開始\n\n### 08. Documentation Specialist\n**狀態**: ⏳ 等待開始\n\n---\n\n## 注意事項\n- 儲存此文件後，Issue Analyst 會自動開始工作\n- 每個角色完成後會自動觸發下一個角色\n- 所有 deliverable 都會儲存在此目錄下\n```\n\n4. **確認建立**：\n   - 告知使用者任務目錄已建立\n   - 提供任務目錄路徑\n   - 說明下一步：儲存 handoff.md 後工作流程會自動開始\n\n5. **觸發工作流程**：\n   - handoff.md 建立後，會自動觸發 01-issue-analyst hook\n   - 工作流程開始執行\n\n如果使用者的訊息不是要建立新任務，請忽略此 hook，不要執行任何動作。"
+    "prompt": "詢問使用者建立新任務內容。\n\n如果使用者想要建立新任務，請執行以下步驟：\n\n1. **提取任務資訊**：\n   - 從使用者訊息中提取任務名稱或描述\n   - 如果使用者沒有提供足夠資訊，詢問任務名稱和簡短描述\n\n2. **建立任務目錄**：\n   - 產生任務目錄名稱：docs/task-YYYYMMDD-HHMM-brief-name/\n   - 例如：docs/task-20241210-1430-add-user-profile/\n   - 建立該目錄\n\n3. **建立 handoff.md**：\n   在任務目錄下建立 handoff.md 文件，包含以下結構：\n   - 標題：任務交接文件\n   - 任務資訊區塊（任務名稱、建立時間、相關 Issue、任務描述）\n   - 工作流程狀態（Status: 🆕 New Task, Current Role: Issue Analyst, Progress: 0/8）\n   - 角色完成狀態表格（8 個角色，初始狀態都是 ⏳ Pending）\n   - 角色工作摘要（每個角色的初始狀態：⏳ 等待開始）\n   - 注意事項（說明儲存後會自動觸發工作流程）\n\n4. **確認建立**：\n   - 告知使用者任務目錄已建立\n   - 提供任務目錄路徑\n   - 說明下一步：儲存 handoff.md 後工作流程會自動開始\n\n5. **觸發工作流程**：\n   - handoff.md 建立後，會自動觸發 01-issue-analyst hook\n   - 工作流程開始執行\n\n如果使用者的訊息不是要建立新任務，請忽略此 hook，不要執行任何動作。"
   },
   "shortName": "00-task-initializer"
 }
@@ -267,7 +267,7 @@ mkdir -p docs
 
 在關鍵步驟新增額外的驗證：
 
-```json
+```
 "prompt": "...執行任務前，先檢查以下條件：\n1. 確認前置條件已滿足\n2. 驗證必要資源可用\n3. 檢查相依性狀態\n..."
 ```
 
@@ -275,6 +275,6 @@ mkdir -p docs
 
 可以在提示詞中加入外部工具的使用：
 
-```json
+```
 "prompt": "...完成分析後，執行以下工具：\n1. 執行 ESLint 檢查程式碼品質\n2. 執行 TypeScript 編譯檢查\n3. 執行單元測試驗證功能\n..."
 ```
